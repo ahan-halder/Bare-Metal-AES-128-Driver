@@ -11,3 +11,11 @@ memory-mapped I/O (MMIO), and hardware-software co-design. The AES-128 RTL modul
 implemented initially and will be developed during the project, followed by integration with a minimal 
 firmware driver. The final system will resemble an early-stage silicon environment where firmware is written 
 to control and validate a newly developed cryptographic IP core.
+
+## Objectives
+The key objectives of this project are: 
+●  To design and implement an AES-128 encryption hardware accelerator in RTL 
+●  To define a memory-mapped register interface for hardware control and status monitoring 
+●  To develop a bare-metal C driver for interacting with the AES hardware 
+●  To validate correct hardware-software operation using standard AES test vectors 
+●  To gain practical experience in SoC firmware development and silicon bring-up workflows
