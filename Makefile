@@ -30,7 +30,8 @@ all: testbench rtl_sim
 
 # Build C testbench with mock hardware
 testbench: $(SRC_DIR)/testbench.c $(SRC_DIR)/aes_driver.c
-	$(GCC) $(GCC_FLAGS) $(GCC_INCLUDE) -o $(SIM_DIR)/testbench \
+	@mkdir -p $(SIM_DIR)
+	$(GCC) $(GCC_FLAGS) -DAES_DRIVER_USE_EXTERNAL_MMIO=1 $(GCC_INCLUDE) -o $(SIM_DIR)/testbench \
 		$(SRC_DIR)/testbench.c $(SRC_DIR)/aes_driver.c
 	@echo "Testbench built successfully"
 
@@ -42,6 +43,7 @@ test: testbench
 # Verilator RTL simulation
 rtl_sim: $(RTL_DIR)/*.v
 	@echo "Building Verilator RTL simulation..."
+	@mkdir -p $(SIM_DIR)
 	@$(VERILATOR) $(VERILATOR_FLAGS) -o $(SIM_DIR)/rtl_sim \
 		$(RTL_DIR)/aes_128_wrapper.v \
 		$(RTL_DIR)/aes_128_core.v \

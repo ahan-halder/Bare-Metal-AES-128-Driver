@@ -4,22 +4,26 @@
 
 ```bash
 cd Bare-Metal-AES-128-Driver
-make clean
-make all
+mkdir -p sim
+gcc -Wall -Wextra -O2 -DAES_DRIVER_USE_EXTERNAL_MMIO=1 -Iinclude -o sim/testbench src/testbench.c src/aes_driver.c
 ```
+
+If you have GNU Make installed, you can also run `mingw32-make test` on Windows or `make test` on a Unix-like shell.
 
 ## Running Tests
 
 ```bash
 # Run C testbench with mock hardware
-make test
+./sim/testbench
 
 # View RTL files
-make view_rtl
+ls rtl/*.v
 
 # Clean build artifacts
-make clean
+rm -rf sim/testbench sim/obj_dir *.o
 ```
+
+The testbench now prints a byte-grid view of the input and output blocks plus a per-byte diff map, so you can visually confirm whether the result matches the reference vector.
 
 ## Project Layout
 
@@ -72,6 +76,14 @@ int main(void) {
 - [ ] Interrupt output wired (optional)
 - [ ] All RTL modules synthesized without errors
 - [ ] Post-synthesis simulation passes test vectors
+
+## What The Console Output Shows
+
+The C testbench gives you three layers of feedback:
+
+1. A standard hex dump of the key, plaintext, ciphertext, and expected bytes.
+2. A 4x4 byte matrix view of the block so you can inspect the AES state layout.
+3. A diff map where `.` means the byte matches the expected output and `^` means it differs.
 
 ## Module Dependencies
 

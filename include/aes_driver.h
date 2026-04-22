@@ -55,19 +55,24 @@
  * Inline MMIO Access Functions
  * ============================================================================ */
 
+#ifndef AES_DRIVER_USE_EXTERNAL_MMIO
 /**
  * Read from a 32-bit register
  */
 static inline uint32_t aes_read_reg(uint32_t addr) {
-    return *(volatile uint32_t *)(addr);
+    return *(volatile uint32_t *)(uintptr_t)addr;
 }
 
 /**
  * Write to a 32-bit register
  */
 static inline void aes_write_reg(uint32_t addr, uint32_t value) {
-    *(volatile uint32_t *)(addr) = value;
+    *(volatile uint32_t *)(uintptr_t)addr = value;
 }
+#else
+uint32_t aes_read_reg(uint32_t addr);
+void aes_write_reg(uint32_t addr, uint32_t value);
+#endif
 
 /**
  * Read 128-bit value from four 32-bit registers
@@ -130,5 +135,13 @@ typedef struct {
     uint32_t base_addr;        // Base address of AES hardware
     int mode;                  // 0=Encrypt, 1=Decrypt
 } aes_ctx_t;
+
+void aes_init(aes_ctx_t *ctx, uint32_t base_addr);
+void aes_set_key(aes_ctx_t *ctx, const uint8_t *key);
+int aes_encrypt(aes_ctx_t *ctx, const uint8_t *plaintext, uint8_t *ciphertext);
+int aes_decrypt(aes_ctx_t *ctx, const uint8_t *ciphertext, uint8_t *plaintext);
+uint32_t aes_get_status(aes_ctx_t *ctx);
+int aes_is_busy(aes_ctx_t *ctx);
+int aes_is_done(aes_ctx_t *ctx);
 
 #endif // AES_128_DRIVER_H
