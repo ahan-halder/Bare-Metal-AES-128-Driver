@@ -43,10 +43,17 @@ make test
 The mock testbench validates three AES vectors for both encryption and decryption and prints:
 
 - a hex dump of key, input, output, and expected values,
-- a 4x4 byte matrix view of the block,
-- a byte-level diff map where `.` means match and `^` means mismatch.
+- a colorized 4x4 byte matrix view for key, input, output, and expected values,
+- a diff heatmap where green means exact match, amber means partial bit match, and red means mismatch,
+- per-test latency, throughput, mismatched-byte count, and bit-error count,
+- an efficiency scorecard and ASCII benchmark chart.
 
 Successful runs end with `6` tests passed and `0` failed.
+
+The testbench also exports metrics files:
+
+- `sim/metrics.csv`
+- `sim/metrics.json`
 
 ## Build And Run
 
@@ -74,9 +81,28 @@ rm -rf sim/testbench sim/obj_dir *.o
 
 ```bash
 mingw32-make test     # Build and run the host testbench
+mingw32-make charts   # Run testbench and generate chart image from metrics
 mingw32-make all      # Build testbench and RTL sim scaffold
 mingw32-make clean    # Remove build artifacts
 mingw32-make help     # Show available targets
+```
+
+### Generate PNG Charts
+
+After running the testbench, you can generate a chart image from `sim/metrics.csv`:
+
+```bash
+python scripts/plot_metrics.py
+```
+
+Output image:
+
+- `sim/benchmark_charts.png`
+
+If matplotlib is missing, install it once:
+
+```bash
+python -m pip install matplotlib
 ```
 
 ## Driver Overview

@@ -1,0 +1,7 @@
+test_id,mode,description,elapsed_us,throughput_mbps,mismatched_bytes,bit_errors,passed
+1,enc,"NIST Test Vector 1",0.069,1852.388,0,0,1
+2,enc,"NIST Test Vector 2",0.072,1769.178,0,0,1
+3,enc,"NIST Test Vector 3",0.077,1664.499,0,0,1
+4,dec,"NIST Test Vector 1",0.063,2041.467,0,0,1
+5,dec,"NIST Test Vector 2",0.066,1937.926,0,0,1
+6,dec,"NIST Test Vector 3",0.077,1669.928,0,0,1

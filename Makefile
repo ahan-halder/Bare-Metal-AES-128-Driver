@@ -1,7 +1,7 @@
 # AES-128 Hardware Accelerator Project Makefile
 # Supports RTL simulation and bare-metal firmware testing
 
-.PHONY: all clean rtl_sim test help
+.PHONY: all clean rtl_sim test charts help
 
 # ============================================================================
 # Configuration
@@ -40,6 +40,11 @@ test: testbench
 	@echo "Running testbench..."
 	@./$(SIM_DIR)/testbench
 
+# Generate benchmark charts from exported metrics
+charts: test
+	@echo "Generating benchmark charts..."
+	@python scripts/plot_metrics.py
+
 # Verilator RTL simulation
 rtl_sim: $(RTL_DIR)/*.v
 	@echo "Building Verilator RTL simulation..."
@@ -69,6 +74,7 @@ help:
 	@echo "  make all          - Build everything"
 	@echo "  make testbench    - Build C testbench"
 	@echo "  make test         - Run C testbench"
+	@echo "  make charts       - Run testbench and render benchmark charts"
 	@echo "  make rtl_sim      - Build Verilator RTL simulation"
 	@echo "  make clean        - Remove build artifacts"
 	@echo "  make help         - Show this help"

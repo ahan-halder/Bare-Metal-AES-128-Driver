@@ -1,0 +1,65 @@
+{
+  "block_bytes": 16,
+  "metrics": [
+    {
+      "test_id": 1,
+      "mode": "enc",
+      "description": "NIST Test Vector 1",
+      "elapsed_us": 0.069,
+      "throughput_mbps": 1852.388,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    },
+    {
+      "test_id": 2,
+      "mode": "enc",
+      "description": "NIST Test Vector 2",
+      "elapsed_us": 0.072,
+      "throughput_mbps": 1769.178,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    },
+    {
+      "test_id": 3,
+      "mode": "enc",
+      "description": "NIST Test Vector 3",
+      "elapsed_us": 0.077,
+      "throughput_mbps": 1664.499,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    },
+    {
+      "test_id": 4,
+      "mode": "dec",
+      "description": "NIST Test Vector 1",
+      "elapsed_us": 0.063,
+      "throughput_mbps": 2041.467,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    },
+    {
+      "test_id": 5,
+      "mode": "dec",
+      "description": "NIST Test Vector 2",
+      "elapsed_us": 0.066,
+      "throughput_mbps": 1937.926,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    },
+    {
+      "test_id": 6,
+      "mode": "dec",
+      "description": "NIST Test Vector 3",
+      "elapsed_us": 0.077,
+      "throughput_mbps": 1669.928,
+      "mismatched_bytes": 0,
+      "bit_errors": 0,
+      "passed": 1
+    }
+  ]
+}
